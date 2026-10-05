@@ -9,7 +9,7 @@
 
     <title>Crypto Detective</title>
 
-    <link rel="stylesheet" href="{{ asset('css/crypto-app.css') }}?v=3.0.1">
+    <link rel="stylesheet" href="{{ asset('css/crypto-app.css') }}?v=3.0.2">
     <link rel="stylesheet" href="{{ asset('css/crypto-components.css') }}?v=3.0.0">
     <link rel="stylesheet" href="{{ asset('css/crypto-coursework-v1.css') }}?v=3.0.0">
     <link rel="stylesheet" href="{{ asset('css/crypto-file-workspace.css') }}?v=3.0.0">
