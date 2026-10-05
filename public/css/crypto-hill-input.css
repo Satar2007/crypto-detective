@@ -1,0 +1,24 @@
+/* Shared Hill input component. No global or Crack selectors. */
+.cd-hill-key { min-width: 0; margin: 10px 0 12px; padding: 16px; border: 1px solid var(--border); border-radius: 12px; background: var(--surface-soft); }
+.cd-hill-key .hk-heading { display: flex; flex-direction: column; gap: 3px; margin-bottom: 12px; }
+.cd-hill-key .hk-heading strong { color: var(--text); font-size: 12px; font-weight: 650; }
+.cd-hill-key .hk-heading span { color: var(--muted); font-size: 11px; }
+.cd-hill-key .hk-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 9px 12px; max-width: 260px; padding: 0 13px; border-left: 2px solid var(--border); border-right: 2px solid var(--border); }
+.cd-hill-key .hk-grid label { display: flex; align-items: center; gap: 8px; margin: 0; color: var(--muted); font: 12px var(--mono); }
+.cd-hill-key .hk-grid input { width: 100%; min-width: 0; padding: 9px 10px; border: 1px solid var(--border); border-radius: 7px; background: var(--surface-soft); color: var(--text); text-align: center; font: 13px var(--mono); }
+.cd-hill-key .hk-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 13px; }
+.cd-hill-key button { padding: 7px 10px; min-height: 34px; border: 1px solid var(--border); border-radius: 7px; color: var(--accent); background: var(--surface-soft); font-size: 11px; font-weight: 600; }
+.cd-hill-key button:disabled { opacity: .5; cursor: not-allowed; }
+.cd-hill-key details { margin-top: 10px; }
+.cd-hill-key summary { padding: 6px 0; color: var(--accent); font-size: 11px; font-weight: 600; cursor: pointer; }
+.cd-hill-key .hk-raw-label, .cd-hill-key .hk-file-label { display: flex; flex-direction: column; gap: 7px; margin-top: 9px; color: var(--text); font-size: 11px; font-weight: 600; }
+.cd-hill-key textarea { width: 100%; min-width: 0; padding: 10px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface-soft); color: var(--text); resize: vertical; font: 12px/1.65 var(--mono); }
+.cd-hill-key .hk-file-label input { width: 100%; min-width: 0; padding: 7px; font-size: 11px; color: var(--text); }
+.cd-hill-key .hk-status, .cd-hill-key .hk-file-status { margin: 12px 0 0; color: var(--accent); font-size: 11px; line-height: 1.7; overflow-wrap: anywhere; }
+.cd-hill-key .hk-file-status:empty { display: none; }
+.cd-hill-key .hk-status.hk-invalid { color: var(--warning); }
+.cd-hill-key .hk-interpret { margin-top: 9px; border-color: var(--border); background: var(--surface-soft); }
+.cd-hill-key input:focus-visible, .cd-hill-key textarea:focus-visible, .cd-hill-key summary:focus-visible, .cd-hill-key button:focus-visible { outline: 3px solid var(--focus-ring); outline-offset: 2px; }
+#page-file > .cx-workspace > .cd-hill-key { margin-top: 16px; }
+.cd-grid > .cd-hill-key { grid-column: 1 / -1; }
+@media(max-width:650px) { .cd-hill-key { padding: 13px; } .cd-hill-key .hk-grid { max-width: 100%; } }

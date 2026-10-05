@@ -1,0 +1,54 @@
+/* Adopted inside #crackResult only. Crack V6 source remains untouched. */
+:host { container-type: inline-size; color: #fff7f2; font-family: 'Segoe UI', Inter, system-ui, sans-serif; white-space: normal; }
+.shell { border-color: rgba(255,231,221,.28); background: linear-gradient(145deg, #9d2116, #790D0D); box-shadow: none; }
+.topbar, .hero, .footer { border-color: rgba(255,231,221,.22); }
+.title { color: #fff7f2; font-size: 19px; }
+.eyebrow, .algo { color: #ffded1; font-size: 11px; }
+.coverage, .section-subtitle, .message, .reason, .count, .page-info, .note, .loading-sub { color: #f0cfc7; font-size: 12px; line-height: 1.65; }
+.label { color: #eac9c0; font-size: 11px; letter-spacing: .05em; }
+.section-title { color: #fff7f2; font-size: 15px; }
+.result-card, .metric-panel, .metric, .candidate, .mini { border-color: rgba(255,231,221,.22); }
+.result-card, .metric-panel { background: rgba(74,7,7,.32); }
+.plaintext { color: #fff9f2; font-size: 21px; }
+.pill { border-color: rgba(255,231,221,.25); background: rgba(255,255,255,.06); color: #f0cfc7; font-size: 12px; min-height: 31px; }
+.pill strong, .metric-value { color: #fff7f2; }
+.metric-value { font-size: 17px; }
+.status, .status.cracked, .status.ambiguous, .status.key_required, .status.undetermined { border-color: rgba(255,231,221,.3); background: rgba(255,255,255,.08); color: #fff1e7; height: auto; min-height: 32px; font-size: 11px; padding: 7px 10px; }
+.tab, .small-btn, .action { color: #f9e0d6; background: rgba(64,5,5,.25); border-color: rgba(255,231,221,.28); font-size: 12px; height: auto; min-height: 36px; padding: 7px 12px; border-radius: 8px; }
+.tab:hover { color: #fff; border-color: #ffd7c5; }
+.tab.active, .action.primary { color: #790D0D; background: #fff0e6; border-color: #fff0e6; }
+.tab .num { font-size: 10px; background: rgba(128,32,12,.13); }
+.candidate { background: rgba(80,9,9,.28); gap: 14px; padding: 14px; }
+.candidate.best { border-color: #eab5a0; background: linear-gradient(110deg, rgba(255,221,188,.12), rgba(80,9,9,.28)); }
+.rank, .candidate.best .rank { background: rgba(255,225,207,.1); color: #ffe4d4; font-size: 12px; }
+.best-badge { color: #790D0D; background: #f8d9c1; font-size: 10px; height: auto; padding: 3px 7px; }
+.candidate-plain { color: #fff4e9; font-size: 13px; line-height: 1.65; }
+.mini { background: rgba(64,5,5,.2); }
+.mini-value { color: #fff0e7; font-size: 12px; line-height: 1.5; }
+.reason .candidate-status { color: #ffe4d4; font-size: 11px; }
+.empty { color: #efd1c8; border-color: rgba(255,231,221,.25); background: rgba(70,7,7,.13); font-size: 13px; }
+.loading { background: rgba(74,7,7,.35); border-color: rgba(255,231,221,.22); }
+.loading-title { color: #fff4e9; font-size: 15px; }
+.spinner { border-color: rgba(255,231,221,.2); border-top-color: #ffe4d4; }
+.error { background: rgba(255,225,207,.1); border-color: #eab5a0; color: #fff0e7; font-size: 13px; }
+button:focus-visible { outline: 3px solid #ffe4d4; outline-offset: 3px; }
+.small-btn:disabled { opacity: .5; }
+@media (max-width: 620px) {
+    .plaintext { font-size: 17px; }
+    .metric-value { font-size: 15px; }
+    .topbar, .footer { padding: 16px; }
+    .actions { justify-content: flex-start; }
+}
+@media (prefers-reduced-motion: reduce) { .spinner { animation: none; } }
+
+@container (max-width: 850px) {
+    .hero { grid-template-columns: 1fr; }
+    .candidate { grid-template-columns: 32px minmax(0, 1fr); }
+    .candidate-meta, .reason { grid-column: 2; }
+}
+@container (max-width: 560px) {
+    .candidate { grid-template-columns: 1fr; }
+    .rank, .candidate-meta, .reason { grid-column: 1; }
+    .section-head, .topbar, .footer { align-items: flex-start; flex-direction: column; }
+    .metric-value { font-size: 14px; }
+}

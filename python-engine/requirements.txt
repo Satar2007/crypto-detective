@@ -1,0 +1,2 @@
+# Backend v1 uses only the Python standard library.
+# Web dependencies will be added in the next phase (FastAPI/UI).
