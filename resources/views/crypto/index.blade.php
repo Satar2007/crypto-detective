@@ -9,11 +9,12 @@
 
     <title>Crypto Detective</title>
 
-    <link rel="stylesheet" href="{{ asset('css/crypto-app.css') }}?v=3.0.2">
+    <link rel="stylesheet" href="{{ asset('css/crypto-app.css') }}?v=3.1.0">
     <link rel="stylesheet" href="{{ asset('css/crypto-components.css') }}?v=3.0.0">
     <link rel="stylesheet" href="{{ asset('css/crypto-coursework-v1.css') }}?v=3.0.0">
     <link rel="stylesheet" href="{{ asset('css/crypto-file-workspace.css') }}?v=3.0.0">
     <link rel="stylesheet" href="{{ asset('css/crypto-hill-input.css') }}?v=3.0.0">
+    <link rel="stylesheet" href="{{ asset('css/crypto-motion.css') }}?v=1.0.0">
 </head>
 
 <body>
@@ -23,7 +24,6 @@
     <aside class="sidebar">
 
         <div class="brand">
-            <div class="brand-mark">CD</div>
 
             <h1>Crypto Detective</h1>
 
@@ -31,53 +31,32 @@
                 Enkripsi, analisis, dan simulasi.
             </p>
         </div>
-
-        <div class="nav-label">Ruang kerja</div>
-        <nav class="nav" aria-label="Navigasi ruang kerja">
-            <button type="button" class="nav-button active" data-page="lab" aria-current="page"><span class="nav-index">01</span><span>Lab Kriptografi</span></button>
-            <button type="button" class="nav-button" data-page="crack"><span class="nav-index">02</span><span>Analisis Pemecahan Sandi</span></button>
-            <button type="button" class="nav-button" data-page="simulation"><span class="nav-index">03</span><span>Alice / Bob / Trudy</span></button>
-            <button type="button" class="nav-button" data-page="history"><span class="nav-index">04</span><span>Riwayat</span></button>
-            <button type="button" class="nav-button" data-page="file"><span class="nav-index">05</span><span>Lab File .txt</span></button>
-            <button type="button" class="nav-button" data-page="benchmark"><span class="nav-index">06</span><span>Beban Komputasi</span></button>
+        <nav class="nav" aria-label="Navigasi utama">
+            <button type="button" class="nav-button active" data-page="lab" aria-current="page"><span>Lab Kriptografi</span></button>
+            <button type="button" class="nav-button" data-page="crack"><span>Analisis Pemecahan Sandi</span></button>
+            <button type="button" class="nav-button" data-page="simulation"><span>Alice / Bob / Trudy</span></button>
+            <button type="button" class="nav-button" data-page="history"><span>Riwayat</span></button>
+            <button type="button" class="nav-button" data-page="file"><span>Lab File .txt</span></button>
+            <button type="button" class="nav-button" data-page="benchmark"><span>Beban Komputasi</span></button>
         </nav>
 
-        <div class="engine-box">
-
-            <div class="engine-title">
-                Mesin Kriptografi
-            </div>
-
-            <div class="engine-status">
-                <span
-                    id="engineDot"
-                    class="status-dot"
-                ></span>
-
-                <span id="engineText">
-                    Memeriksa…
-                </span>
-            </div>
-
-        </div>
-
     </aside>
+
+    <!-- Keep existing health-check hooks outside the visible navigation. -->
+    <div hidden aria-hidden="true"><span id="engineDot"></span><span id="engineText"></span></div>
 
     <main class="main">
 
         <header class="topbar">
 
             <div>
-                <div class="eyebrow">
-                    Ruang kerja
-                </div>
 
                 <h2 id="pageTitle">
                     Laboratorium Kriptografi
                 </h2>
 
                 <p id="pageDescription">
-                    Enkripsi dan dekripsi enam algoritma dalam satu ruang kerja.
+                    Enkripsi dan dekripsi dengan enam algoritma.
                 </p>
             </div>
 
@@ -242,12 +221,12 @@
 
                         </div>
 
-<div class="field" id="otpTextFormats" hidden>
-<label for="otpTextCipherFormat">Format teks sandi OTP</label>
-<select id="otpTextCipherFormat"><option value="base64">Base64 / Base64URL (aplikasi ini)</option><option value="hex">Hexadecimal (Hex)</option></select>
-<label for="otpTextKeyFormat">Format kunci OTP</label>
-<select id="otpTextKeyFormat"><option value="base64">Base64 / Base64URL</option><option value="hex">Hexadecimal (Hex)</option></select>
-<small>Pilih format sesuai program pengirim. Teks sandi dan kunci boleh berbeda format. Spasi, baris baru, dan BOM diabaikan.</small>
+<div class="field lab-format-grid" id="otpTextFormats" hidden>
+<div><label for="otpTextCipherFormat">Format teks sandi OTP</label>
+<select id="otpTextCipherFormat"><option value="base64">Base64 / Base64URL (aplikasi ini)</option><option value="hex">Hexadecimal (Hex)</option></select></div>
+<div><label for="otpTextKeyFormat">Format kunci OTP</label>
+<select id="otpTextKeyFormat"><option value="base64">Base64 / Base64URL</option><option value="hex">Hexadecimal (Hex)</option></select></div>
+<small class="lab-format-note">Pilih format sesuai program pengirim. Teks sandi dan kunci boleh berbeda format. Spasi, baris baru, dan BOM diabaikan.</small>
 </div>
                         <button
                             id="decryptButton"
@@ -495,6 +474,13 @@
 <script src="{{ asset('js/crypto-compatibility-v1.js') }}?v=2.0.1" defer></script>
 <script src="{{ asset('js/crypto-hill-input.js') }}?v=1.0.0" defer></script>
 <script src="{{ asset('js/crypto-ui-simple.js') }}?v=1.0.0" defer></script>
-<script src="{{ asset('js/crypto-ui-indonesia.js') }}?v=1.0.0" defer></script>
+<script src="{{ asset('js/crypto-ui-indonesia.js') }}?v=1.0.1" defer></script>
+<script src="{{ asset('js/crypto-ui-compact.js') }}?v=1.0.0" defer></script>
+<aside id="cryptoMascot" class="crypto-mascot" aria-hidden="true">
+    <div class="crypto-mascot-pose"><img src="{{ asset('images/crypto-spider-upright.png') }}" alt="" width="375" height="666"></div>
+    <div class="crypto-mascot-pose crypto-mascot-second"><img src="{{ asset('images/crypto-spider-inverted.png') }}" alt="" width="375" height="666"></div>
+</aside>
+<button type="button" id="cryptoMotionToggle" class="crypto-motion-toggle" aria-pressed="true">Animasi: aktif</button>
+<script src="{{ asset('js/crypto-motion.js') }}?v=1.0.0" defer></script>
 </body>
 </html>

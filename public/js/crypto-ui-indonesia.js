@@ -2,6 +2,7 @@
 (() => {
     'use strict';
     const phrases = {
+        'Enkripsi dan dekripsi enam algoritma dalam satu workspace.': 'Enkripsi dan dekripsi dengan enam algoritma.',
         'Crypto Lab': 'Lab Kriptografi', 'Crypto Laboratory': 'Laboratorium Kriptografi',
         'Crack Analyzer': 'Analisis Pemecahan Sandi', 'Smart Crack Analyzer': 'Analisis Pemecahan Sandi',
         'File .txt Lab': 'Lab File .txt', 'Computational Load': 'Beban Komputasi',
