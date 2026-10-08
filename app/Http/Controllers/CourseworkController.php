@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CryptoOperation;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -73,9 +74,11 @@ class CourseworkController extends Controller
     {
         $validated = $request->validate([
             'mode' => ['required', 'in:encrypt,decrypt'],
-            'algorithm' => ['required', 'in:caesar,vigenere,playfair,hill,otp,stream'],
+            'algorithm' => ['required', 'in:auto,caesar,vigenere,playfair,hill,otp,otp-alpha,stream'],
             'key' => ['nullable'],
-            'file' => ['required', 'file', 'max:2048'],
+            'file' => ['required', 'file', 'max:3072'],
+            'record' => ['nullable', 'boolean'],
+            'profile' => ['nullable', 'in:detective,cryptozar-dika'],
         ]);
 
         $file = $request->file('file');
@@ -92,9 +95,24 @@ class CourseworkController extends Controller
             ]);
         }
 
+        if (!mb_check_encoding($content, 'UTF-8')) {
+            throw ValidationException::withMessages(['file' => 'File harus berupa teks UTF-8 yang valid.']);
+        }
         $mode = $validated['mode'];
+        if ($mode === 'encrypt' && strlen($content) > 2 * 1024 * 1024) {
+            throw ValidationException::withMessages(['file' => 'Plaintext maksimum 2 MB.']);
+        }
         $algorithm = $validated['algorithm'];
-        $key = $this->normalizeKey($algorithm, $validated['key'] ?? null);
+        if ($mode === 'decrypt' && $algorithm === 'auto') {
+            throw ValidationException::withMessages(['algorithm' => 'Kandidat Auto harus diperiksa dengan metode konkret.']);
+        }
+        $profile = $validated['profile'] ?? 'detective';
+        if ($profile === 'cryptozar-dika' && in_array($algorithm, ['auto', 'otp-alpha'], true)) {
+            throw ValidationException::withMessages(['algorithm' => 'Profil Dika membutuhkan pilihan konkret dari enam metode.']);
+        }
+        $key = $profile === 'cryptozar-dika'
+            ? ($validated['key'] ?? null)
+            : $this->normalizeKey($algorithm, $validated['key'] ?? null);
 
         if ($mode === 'decrypt' && ($key === null || $key === '')) {
             throw ValidationException::withMessages([
@@ -113,8 +131,8 @@ class CourseworkController extends Controller
                 ->acceptJson()
                 ->asJson()
                 ->post(
-                    $this->engineUrl() . ($mode === 'encrypt' ? '/encrypt' : '/decrypt'),
-                    $payload
+                    $this->engineUrl() . ($profile === 'cryptozar-dika' ? '/coursework/cryptozar' : ($algorithm === 'otp-alpha' ? '/coursework/otp-alpha' : ($mode === 'encrypt' ? '/encrypt' : '/decrypt'))),
+                    $profile === 'cryptozar-dika' ? ['mode' => $mode, 'algorithm' => $algorithm, 'text' => $content, 'key' => $key] : ($algorithm === 'otp-alpha' ? ['mode' => $mode, 'text' => $content, 'key' => $key] : $payload)
                 );
         } catch (Throwable $e) {
             report($e);
@@ -133,13 +151,30 @@ class CourseworkController extends Controller
             ? (string) ($result['ciphertext'] ?? '')
             : (string) ($result['plaintext'] ?? '');
 
+        $resolvedAlgorithm = (string) ($result['algorithm'] ?? $algorithm);
+        $resolvedKey = $result['key'] ?? $key;
+        $operationId = null;
+        if ($request->boolean('record')) {
+            $operation = CryptoOperation::create([
+                'mode' => $mode, 'algorithm' => $resolvedAlgorithm,
+                'input_text' => $content, 'output_text' => $outputText,
+                'key_value' => is_array($resolvedKey) ? json_encode($resolvedKey) : (string) $resolvedKey,
+                'status' => 'success', 'confidence' => null,
+                'reason' => 'Operasi Lab terpadu; profil ' . ($profile === 'cryptozar-dika' ? 'CryptoZar Dika' : 'Crypto Detective') . '.',
+                'metadata' => ['profile' => $profile, 'engine_response' => $result, 'metrics' => $result['metrics'] ?? null],
+            ]);
+            $operationId = $operation->id;
+        }
+
         $basename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
         $safeBasename = preg_replace('/[^A-Za-z0-9_-]+/', '-', $basename) ?: 'crypto-file';
 
         return response()->json([
             'success' => true,
             'mode' => $mode,
-            'algorithm' => $algorithm,
+            'algorithm' => $resolvedAlgorithm,
+            'metrics' => $result['metrics'] ?? null,
+            'operation_id' => $operationId,
             'input_name' => $file->getClientOriginalName(),
             'input_bytes' => strlen($content),
             'output_bytes' => strlen($outputText),

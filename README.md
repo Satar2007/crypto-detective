@@ -4,7 +4,7 @@
 
 **Laboratorium kriptografi untuk mengenkripsi, mendekripsi, dan memahami pemecahan sandi.**
 
-Enam algoritma · Pertukaran file `.txt` · Simulasi Alice / Bob / Trudy · Pengukuran beban komputasi
+Enam algoritma · Lab pesan dan file `.txt` terpadu · Crack Analyzer · Riwayat · Metrik setiap operasi
 
 [Mulai](#menjalankan-aplikasi) · [Galeri](#galeri-aplikasi) · [Algoritma](#enam-algoritma) · [Pengujian](#pengujian) · [Struktur](#struktur-project)
 
@@ -22,10 +22,9 @@ Project ini dikembangkan untuk tugas kriptografi di **Universitas Sanata Dharma*
 |---|---|
 | Laboratorium Kriptografi | Enkripsi/dekripsi pesan, unggah teks dan kunci, pilihan algoritma, salin serta unduh hasil |
 | Analisis Pemecahan Sandi | Crack Analyzer V6: analisis tanpa kunci, kandidat plaintext, kunci yang ditemukan, dan tingkat keyakinan |
-| Alice / Bob / Trudy | Simulasi penerima sah dan penyerang; kunci serta plaintext asli tidak disertakan dalam respons khusus Trudy |
 | Riwayat | Catatan operasi enkripsi, dekripsi, dan analisis yang tersimpan di database |
-| Lab File `.txt` | Unggah ciphertext/plaintext dan kunci, pemrosesan manual atau pemeriksaan kandidat otomatis, pratinjau, kunci yang digunakan, dan unduh output |
-| Beban Komputasi | Runtime aktual, ukuran input/output, throughput, puncak alokasi memori Python, kompleksitas teoretis, dan laporan `.txt` |
+| Lab terpadu | Tempel pesan atau unggah `.txt`, unggah kunci, pilih metode atau Auto, pratinjau, dan unduh hasil serta kunci |
+| Metrik operasi | Runtime aktual, ukuran input/output, throughput, puncak alokasi Python, dan teori tampil langsung bersama hasil Lab |
 
 Antarmuka dilengkapi sidebar membulat, transisi ringan, serta maskot dua pose transparan. Animasi dapat dimatikan, mengikuti pengaturan *reduced motion*, dan maskot disembunyikan ketika ruang layar tidak cukup.
 
@@ -66,7 +65,7 @@ Antarmuka dilengkapi sidebar membulat, transisi ringan, serta maskot dua pose tr
 
 </details>
 
-Screenshot di atas menampilkan keadaan aplikasi dan data percobaan pada 6 Oktober 2026; galeri benchmark menampilkan formulir sebelum pengukuran dijalankan.
+Screenshot di atas merupakan dokumentasi versi sebelum penyederhanaan tiga menu dan menampilkan keadaan aplikasi dan data percobaan pada 6 Oktober 2026; galeri benchmark menampilkan formulir sebelum pengukuran dijalankan.
 
 ## Enam algoritma
 
@@ -170,24 +169,25 @@ Invoke-RestMethod 'http://127.0.0.1:8100/health' | ConvertTo-Json -Depth 5
 
 ## Workflow pertukaran file
 
-1. Buka **Lab File .txt**, pilih mode enkripsi dan algoritma.
+1. Buka **Lab Kriptografi**, pilih mode enkripsi dan algoritma.
 2. Unggah plaintext UTF-8, masukkan kunci atau gunakan pembangkitan otomatis pada mode yang mendukung.
 3. Periksa pratinjau serta kunci yang digunakan, lalu unduh ciphertext `.txt`.
 4. Penerima mengunggah ciphertext dan kunci yang sesuai untuk dekripsi. File kunci hanya berisi nilai kunci, tanpa label tambahan.
 5. Untuk tugas serangan Trudy, kirim ciphertext tanpa kunci dan catat hasil analisis, kandidat, serta keterbatasannya.
 
-File teks dibatasi maksimum 2 MB pada workflow unggah. Pemisahan kunci dari ciphertext penting untuk membedakan penerima sah dari skenario penyerang.
+Plaintext maksimum 2 MB, ciphertext dan kunci maksimum 3 MB untuk menampung ekspansi Base64. PHP `upload_max_filesize` dan `post_max_size` harus cukup untuk file serta overhead multipart (disarankan minimal 4M dan 8M). Pemisahan kunci dari ciphertext penting untuk membedakan penerima sah dari skenario penyerang.
 
 ## Beban komputasi
 
-Benchmark memproses masukan yang sama untuk enam algoritma dengan 1–50 iterasi per operasi.
+Setiap enkripsi/dekripsi Lab mengukur operasi yang menghasilkan output tersebut **sekali**, tanpa menjalankan ulang algoritma untuk mengukur memori.
 
-- Waktu diukur menggunakan `time.perf_counter_ns()` dan dilaporkan sebagai rata-rata dalam milidetik.
-- Puncak alokasi memori diukur dengan `tracemalloc` pada pengukuran terpisah; ini bukan total RAM proses atau sistem.
-- Laporan mencakup ukuran byte masukan/keluaran, throughput enkripsi/dekripsi, dan kompleksitas teoretis.
-- Pengukuran enkripsi mencakup pembangkitan kunci; waktu HTTP, browser, dan database tidak dimasukkan.
+- Runtime menggunakan `time.perf_counter_ns()`; termasuk pembangkitan kunci dan overhead `tracemalloc`.
+- Puncak alokasi Python menggunakan `tracemalloc`, bukan total RAM proses. Aktivitas thread lain dapat ikut terukur.
+- Ukuran input/output adalah byte UTF-8 teks yang diterima/dihasilkan engine; representasi ciphertext dapat berupa Base64. Konversi Hex di browser berada di luar pengukuran.
+- Throughput dihitung dari byte input dibagi runtime. Kompleksitas teoretis dan penjelasan ditampilkan dalam rincian.
+- HTTP, unggah file, database, tampilan, dan antrean lock tidak dihitung.
 
-Angka berasal dari eksekusi aktual, bukan nilai hard-coded. Hasil dapat berbeda sesuai ukuran pesan, iterasi, perangkat, dan aktivitas sistem.
+Menu simulasi, Lab File terpisah, dan benchmark telah dihapus dari tampilan. Endpoint lama serta regression test tetap dipertahankan untuk kompatibilitas. Auto dekripsi menampilkan kandidat dengan kunci yang diberikan, bukan jaminan identifikasi atau pengganti Crack Analyzer. Pemeriksaan kandidat Auto tidak disimpan di Riwayat.
 
 ## Pengujian
 
@@ -261,3 +261,70 @@ Aset maskot merupakan materi visual pihak ketiga yang disediakan untuk antarmuka
 **Rafael Paskah Bintang Pinasthi**
 Informatika — Universitas Sanata Dharma
 GitHub: [Satar2007](https://github.com/Satar2007)
+
+## Validasi penyederhanaan Lab
+
+Python: 36/36 lulus di lingkungan pengembangan, termasuk delapan tes metrik baru. Tes alur JavaScript menggunakan adapter ke core Python, bukan pengganti pengujian Laravel atau browser. Jalankan `Test-Integrated-Lab.ps1` di Windows untuk regression Laravel, smoke, simulasi API lama, file, benchmark API lama, dan metrik operasi. Periksa tiga menu, desktop/mobile, Crack merah, History, upload/download, Hill, dan kandidat Auto secara manual.
+
+
+
+## Lab interoperabilitas
+
+GUI tetap milik **Crypto Detective**: enam algoritma, tanpa profil bernama teman.
+Saat enkripsi, OTP/Stream menampilkan varian; empat metode klasik menyediakan
+pengaturan lanjutan. Saat dekripsi, varian/format yang didukung dicoba otomatis
+untuk algoritma pilihan (atau deteksi seluruh algoritma), dan hasil dipilih pengguna.
+Hasil yang sama dikelompokkan; tiga kandidat pertama tampil, sisanya dapat dibuka.
+Keterbacaan hanya mengurutkan kandidat, bukan bukti kebenaran plaintext.
+
+| Metode | Dukungan |
+| --- | --- |
+| Caesar | Bentuk teks asli atau normalisasi A–Z kapital |
+| Vigenère | Bentuk teks asli atau normalisasi A–Z kapital |
+| Playfair | J→I; filler X atau X/Q; filler tetap dipertahankan |
+| Hill | Core asli 2×2; matriks 2×2/3×3 vektor kolom, padding X, key invertibel |
+| OTP | XOR byte Hex/Base64; XOR karakter dengan key teks; alfabet A=0 modulo 26 |
+| Stream | SHA-256 counter; RC4 karakter; RC4 byte UTF-8 Hex/Base64; LCG modulo 256 |
+
+Generate key membuat key sesuai aturan pilihan dan panjang plaintext untuk OTP.
+OTP byte memakai pad acak penuh sepanjang byte. Key pendek tidak diulang diam-diam.
+OTP karakter menerima key minimal sepanjang karakter pesan untuk interoperabilitas;
+pad teks buatan sendiri/generator huruf tidak menjamin keamanan OTP byte.
+RC4 dan LCG hanya untuk pembelajaran; LCG mempunyai 256 seed. Tidak ada autentikasi
+ciphertext, sehingga key yang salah dapat menghasilkan teks terbaca.
+
+Untuk bertukar dengan kode Rafael: bentuk teks asli Caesar/Vigenère, Playfair filler X,
+Hill 2×2, OTP XOR karakter, Stream RC4 karakter. Untuk kode Dika: normalisasi A–Z,
+Playfair X/Q, Hill matriks, OTP XOR byte Hex, Stream LCG Hex. Ini petunjuk dokumentasi,
+bukan pilihan profil GUI. Varian harus cocok pada penerima; satu ciphertext RC4 tidak
+bisa langsung digunakan sebagai LCG. Normalisasi/filler membatasi round-trip bentuk asli.
+
+Upload/download `.txt` UTF-8 menjaga BOM, CRLF, karakter NULL dan spasi. Nilai asli
+file disimpan terpisah dari textarea; setelah diedit, teks hasil edit digunakan.
+Jalur API baru mengangkut teks/key dengan Base64 agar middleware tidak melakukan trim.
+RC4 karakter memakai kode Unicode seperti aplikasi Rafael; RC4 byte memakai UTF-8.
+Pembaca file penerima yang menormalkan CR/LF dapat merusak ciphertext karakter mentah;
+format Hex/Base64 hanya membantu bila penerima juga mendukung format tersebut.
+Batas plaintext 2 MB; ciphertext/key 6 MB. Ciphertext/key unduhan tidak ditambah header.
+
+Metrik berasal dari satu operasi aktual yang menghasilkan kandidat terpilih, bukan total
+waktu semua percobaan Auto. Transport HTTP/Base64 web dan waktu Generate di browser
+tidak dihitung. Key kosong saat enkripsi dibangkitkan di engine dan masuk waktu operasi.
+Percobaan kandidat tidak menambah Riwayat; enkripsi dicatat bersama varian/format.
+Endpoint legacy tetap dipertahankan untuk regression; core asli dan Crack V6 tidak diubah.
+
+Fungsi kompatibilitas normalisasi diadaptasi dengan atribusi dari CryptoZar,
+**Andika Novanda Putra (245314084)**. Referensi tambahan adalah kode Rafael dan
+`TOP_SECRET.zip` yang diberikan pemilik project. Pengujian memakai 35 vektor dari
+kode Dika serta enam file nyata Rafael, enkripsi dan dekripsi dua arah.
+
+Tes lengkap Windows PowerShell, setelah restart Python engine:
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\Test-Interop-Lab.ps1
+```
+
+Script menjalankan regression Python/Laravel, smoke, simulasi legacy, file/benchmark/
+metrik, kompatibilitas legacy, API interop dan karakter mentah. Smoke/simulasi menambah
+record uji. Pemeriksaan visual desktop/mobile dan pertukaran file pada GUI penerima
+masih perlu dilakukan; tes fungsi murni tidak menggantikan uji file I/O aplikasi penerima.

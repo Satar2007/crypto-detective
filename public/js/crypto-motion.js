@@ -47,7 +47,7 @@
             const anchor = event.target.closest?.('a[download]');
             if (anchor && anchor.download && anchor.href.startsWith('blob:')) announce('Unduhan dimulai');
         }, true);
-        ['encryptResult', 'decryptResult', 'simulationResult', 'cdFileOutput', 'cdBenchmarkSummary'].forEach(id => {
+        ['cxOutput'].forEach(id => {
             const element = document.getElementById(id);
             if (!element) return;
             let pending = false;

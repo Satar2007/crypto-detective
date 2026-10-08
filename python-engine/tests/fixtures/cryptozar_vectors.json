@@ -1,0 +1,251 @@
+{
+  "reference": "CryptoZar Andika Novanda Putra 245314084; pure functions extracted, no GUI import",
+  "source_sha256": "4385b9cf407dfa503752efedd661506ececbaa2f250d04b938f59e5da32c730b",
+  "vectors": [
+    {
+      "algorithm": "caesar",
+      "key": "3",
+      "text": "BELAJAR KRIPTOGRAFI",
+      "ciphertext": "EHODMDUNULSWRJUDIL",
+      "plaintext": "BELAJARKRIPTOGRAFI"
+    },
+    {
+      "algorithm": "caesar",
+      "key": "3",
+      "text": "Halo, Bob! 123",
+      "ciphertext": "KDORERE",
+      "plaintext": "HALOBOB"
+    },
+    {
+      "algorithm": "caesar",
+      "key": "3",
+      "text": "XX BALLOON JAZZ",
+      "ciphertext": "AAEDOORRQMDCC",
+      "plaintext": "XXBALLOONJAZZ"
+    },
+    {
+      "algorithm": "caesar",
+      "key": "3",
+      "text": "é😀\r\nB",
+      "ciphertext": "E",
+      "plaintext": "B"
+    },
+    {
+      "algorithm": "caesar",
+      "key": "3",
+      "text": "﻿Halo\r\nBob!",
+      "ciphertext": "KDORERE",
+      "plaintext": "HALOBOB"
+    },
+    {
+      "algorithm": "vigenere",
+      "key": "KUNCI",
+      "text": "BELAJAR KRIPTOGRAFI",
+      "ciphertext": "LYYCRKLXTQZNBIZKZV",
+      "plaintext": "BELAJARKRIPTOGRAFI"
+    },
+    {
+      "algorithm": "vigenere",
+      "key": "KUNCI",
+      "text": "Halo, Bob! 123",
+      "ciphertext": "RUYQJYV",
+      "plaintext": "HALOBOB"
+    },
+    {
+      "algorithm": "vigenere",
+      "key": "KUNCI",
+      "text": "XX BALLOON JAZZ",
+      "ciphertext": "HROCTVIBPRKTM",
+      "plaintext": "XXBALLOONJAZZ"
+    },
+    {
+      "algorithm": "vigenere",
+      "key": "KUNCI",
+      "text": "é😀\r\nB",
+      "ciphertext": "L",
+      "plaintext": "B"
+    },
+    {
+      "algorithm": "vigenere",
+      "key": "KUNCI",
+      "text": "﻿Halo\r\nBob!",
+      "ciphertext": "RUYQJYV",
+      "plaintext": "HALOBOB"
+    },
+    {
+      "algorithm": "playfair",
+      "key": "RAHASIA",
+      "text": "BELAJAR KRIPTOGRAFI",
+      "ciphertext": "CFKHRHAGARQUVOAHNF",
+      "plaintext": "BELAIARKRIPTOGRAFI"
+    },
+    {
+      "algorithm": "playfair",
+      "key": "RAHASIA",
+      "text": "Halo, Bob! 123",
+      "ciphertext": "SHGQGVDV",
+      "plaintext": "HALOBOBX"
+    },
+    {
+      "algorithm": "playfair",
+      "key": "RAHASIA",
+      "text": "XX BALLOON JAZZ",
+      "ciphertext": "HXVDHKGQUGRHVYVY",
+      "plaintext": "XQXBALLOONIAZXZX"
+    },
+    {
+      "algorithm": "playfair",
+      "key": "RAHASIA",
+      "text": "é😀\r\nB",
+      "ciphertext": "DV",
+      "plaintext": "BX"
+    },
+    {
+      "algorithm": "playfair",
+      "key": "RAHASIA",
+      "text": "﻿Halo\r\nBob!",
+      "ciphertext": "SHGQGVDV",
+      "plaintext": "HALOBOBX"
+    },
+    {
+      "algorithm": "hill",
+      "key": "3 3 2 5",
+      "text": "BELAJAR KRIPTOGRAFI",
+      "ciphertext": "PWHWBSDGXWYVIGZINY",
+      "plaintext": "BELAJARKRIPTOGRAFI"
+    },
+    {
+      "algorithm": "hill",
+      "key": "3 3 2 5",
+      "text": "Halo, Bob! 123",
+      "ciphertext": "VOXOTUUN",
+      "plaintext": "HALOBOBX"
+    },
+    {
+      "algorithm": "hill",
+      "key": "3 3 2 5",
+      "text": "XX BALLOON JAZZ",
+      "ciphertext": "IFDCOZGUOTXVOJ",
+      "plaintext": "XXBALLOONJAZZX"
+    },
+    {
+      "algorithm": "hill",
+      "key": "3 3 2 5",
+      "text": "é😀\r\nB",
+      "ciphertext": "UN",
+      "plaintext": "BX"
+    },
+    {
+      "algorithm": "hill",
+      "key": "3 3 2 5",
+      "text": "﻿Halo\r\nBob!",
+      "ciphertext": "VOXOTUUN",
+      "plaintext": "HALOBOBX"
+    },
+    {
+      "algorithm": "hill",
+      "key": "6 24 1 13 16 10 20 17 15",
+      "text": "BELAJAR KRIPTOGRAFI",
+      "ciphertext": "JFTIOXVFLLOYLGNYEX",
+      "plaintext": "BELAJARKRIPTOGRAFI"
+    },
+    {
+      "algorithm": "hill",
+      "key": "6 24 1 13 16 10 20 17 15",
+      "text": "Halo, Bob! 123",
+      "ciphertext": "BTTSANJNC",
+      "plaintext": "HALOBOBXX"
+    },
+    {
+      "algorithm": "hill",
+      "key": "6 24 1 13 16 10 20 17 15",
+      "text": "XX BALLOON JAZZ",
+      "ciphertext": "PBIPAORQLBDJXNO",
+      "plaintext": "XXBALLOONJAZZXX"
+    },
+    {
+      "algorithm": "hill",
+      "key": "6 24 1 13 16 10 20 17 15",
+      "text": "é😀\r\nB",
+      "ciphertext": "JNC",
+      "plaintext": "BXX"
+    },
+    {
+      "algorithm": "hill",
+      "key": "6 24 1 13 16 10 20 17 15",
+      "text": "﻿Halo\r\nBob!",
+      "ciphertext": "BTTSANJNC",
+      "plaintext": "HALOBOBXX"
+    },
+    {
+      "algorithm": "otp",
+      "key": "000102030405060708090a0b0c0d0e0f101112",
+      "text": "BELAJAR KRIPTOGRAFI",
+      "ciphertext": "42444e424e445427435b435b5842495d51575b",
+      "plaintext": "BELAJAR KRIPTOGRAFI"
+    },
+    {
+      "algorithm": "otp",
+      "key": "000102030405060708090a0b0c0d",
+      "text": "Halo, Bob! 123",
+      "ciphertext": "48606e6c282544686a282a3a3e3e",
+      "plaintext": "Halo, Bob! 123"
+    },
+    {
+      "algorithm": "otp",
+      "key": "000102030405060708090a0b0c0d0e",
+      "text": "XX BALLOON JAZZ",
+      "ciphertext": "5859224145494a4847472a414d5754",
+      "plaintext": "XX BALLOON JAZZ"
+    },
+    {
+      "algorithm": "otp",
+      "key": "000102030405060708",
+      "text": "é😀\r\nB",
+      "ciphertext": "c3a8f29c9c850b0d4a",
+      "plaintext": "é😀\r\nB"
+    },
+    {
+      "algorithm": "otp",
+      "key": "000102030405060708090a0b0c",
+      "text": "﻿Halo\r\nBob!",
+      "ciphertext": "efbabd4b6569690a024b65692d",
+      "plaintext": "﻿Halo\r\nBob!"
+    },
+    {
+      "algorithm": "stream",
+      "key": "77",
+      "text": "BELAJAR KRIPTOGRAFI",
+      "ciphertext": "c0cef4d8b4b68605f1f179a1e2c08bafb3fde1",
+      "plaintext": "BELAJAR KRIPTOGRAFI"
+    },
+    {
+      "algorithm": "stream",
+      "key": "77",
+      "text": "Halo, Bob! 123",
+      "ciphertext": "caead4f6d2d7964ad88210c084bc",
+      "plaintext": "Halo, Bob! 123"
+    },
+    {
+      "algorithm": "stream",
+      "key": "77",
+      "text": "XX BALLOON JAZZ",
+      "ciphertext": "dad398dbbfbb986af5ed10bbf7d596",
+      "plaintext": "XX BALLOON JAZZ"
+    },
+    {
+      "algorithm": "stream",
+      "key": "77",
+      "text": "é😀\r\nB",
+      "ciphertext": "412248066677d92ff8",
+      "plaintext": "é😀\r\nB"
+    },
+    {
+      "algorithm": "stream",
+      "key": "77",
+      "text": "﻿Halo\r\nBob!",
+      "ciphertext": "6d3007d19f9bbb28b0e15f9397",
+      "plaintext": "﻿Halo\r\nBob!"
+    }
+  ]
+}

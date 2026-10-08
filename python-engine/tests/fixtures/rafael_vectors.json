@@ -1,0 +1,42 @@
+{
+  "reference": "Rafael provided code and TOP_SECRET.zip; pure functions only",
+  "source_sha256": "a5546d2e95dc8cfa70c057557fe0a3b1ce634cd38d8165df0f99a57405ade2f3",
+  "vectors": [
+    {
+      "variant": "caesar",
+      "ciphertext": "LXKTGZ LXZXKT",
+      "key": "19",
+      "plaintext": "SERANG SEGERA"
+    },
+    {
+      "variant": "vigenere",
+      "ciphertext": "SAKEAGA LEFNEUGWPSC",
+      "key": "WASPADA",
+      "plaintext": "WASPADA PENYERGAPAN"
+    },
+    {
+      "variant": "playfair",
+      "ciphertext": "FQUPQHDSUPDSKNISPC",
+      "key": "SKENKOK",
+      "plaintext": "BUTUHBANTUANSEGERA"
+    },
+    {
+      "variant": "hill",
+      "ciphertext": "MCTKAMTKTWAGRYZQ",
+      "key": "1,2,6,7",
+      "plaintext": "KOTAKITADISERANG"
+    },
+    {
+      "variant": "otp-text",
+      "ciphertext": "\u001cx\u0015c\fs\u0019\u0012\u0012\u0019v\u001a\u0012c\u0010\u0015\u0002`\u0001`\u001f\u0005",
+      "key": "K9F3M7X2PL8QW10VN5R4ZW",
+      "plaintext": "WASPADA BUNKER CLUSTER"
+    },
+    {
+      "variant": "stream-rc4",
+      "ciphertext": "¹\u0018? ®Á\u000e¾Ôù\u0018Íï\u0017ì|\\\u0018",
+      "key": "SERANGANUDARA",
+      "plaintext": "AWAS ADA AIR STRIKE"
+    }
+  ]
+}

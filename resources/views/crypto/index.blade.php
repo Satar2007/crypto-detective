@@ -11,10 +11,10 @@
 
     <link rel="stylesheet" href="{{ asset('css/crypto-app.css') }}?v=3.1.0">
     <link rel="stylesheet" href="{{ asset('css/crypto-components.css') }}?v=3.0.0">
-    <link rel="stylesheet" href="{{ asset('css/crypto-coursework-v1.css') }}?v=3.0.0">
-    <link rel="stylesheet" href="{{ asset('css/crypto-file-workspace.css') }}?v=3.0.0">
+    <link rel="stylesheet" href="{{ asset('css/crypto-file-workspace.css') }}?v=5.0.0">
     <link rel="stylesheet" href="{{ asset('css/crypto-hill-input.css') }}?v=3.0.0">
     <link rel="stylesheet" href="{{ asset('css/crypto-motion.css') }}?v=1.0.0">
+    <link rel="stylesheet" href="{{ asset('css/crypto-lab-metrics.css') }}?v=1.0.0">
 </head>
 
 <body>
@@ -28,16 +28,13 @@
             <h1>Crypto Detective</h1>
 
             <p>
-                Enkripsi, analisis, dan simulasi.
+                Pesan, file, dan analisis sandi.
             </p>
         </div>
         <nav class="nav" aria-label="Navigasi utama">
             <button type="button" class="nav-button active" data-page="lab" aria-current="page"><span>Lab Kriptografi</span></button>
             <button type="button" class="nav-button" data-page="crack"><span>Analisis Pemecahan Sandi</span></button>
-            <button type="button" class="nav-button" data-page="simulation"><span>Alice / Bob / Trudy</span></button>
             <button type="button" class="nav-button" data-page="history"><span>Riwayat</span></button>
-            <button type="button" class="nav-button" data-page="file"><span>Lab File .txt</span></button>
-            <button type="button" class="nav-button" data-page="benchmark"><span>Beban Komputasi</span></button>
         </nav>
 
     </aside>
@@ -56,199 +53,13 @@
                 </h2>
 
                 <p id="pageDescription">
-                    Enkripsi dan dekripsi dengan enam algoritma.
+                    Enkripsi dan dekripsi pesan atau file, disertai pengukuran komputasi aktual.
                 </p>
             </div>
 
         </header>
 
-        <!-- CRYPTO LAB -->
-        <section
-            id="page-lab"
-            class="page active"
-        >
-
-            <div class="grid">
-
-                <article class="card">
-
-                    <div class="card-header">
-                        <h3>Enkripsi</h3>
-                        <p>
-                            Pilih algoritma manual atau gunakan Pemilihan Otomatis.
-                        </p>
-                    </div>
-
-                    <div class="card-body">
-
-                        <div class="field">
-                            <label for="encryptPlaintext">
-                                Teks asli
-                            </label>
-
-                            <textarea
-                                id="encryptPlaintext"
-                                placeholder="Masukkan pesan..."
-                            ></textarea>
-                        </div>
-
-                        <div class="row">
-
-                            <div class="field">
-                                <label for="encryptAlgorithm">
-                                    Algoritma
-                                </label>
-
-                                <select id="encryptAlgorithm">
-                                    <option value="auto">
-                                        Otomatis
-                                    </option>
-                                    <option value="caesar">
-                                        Caesar
-                                    </option>
-                                    <option value="vigenere">
-                                        Vigenère
-                                    </option>
-                                    <option value="playfair">
-                                        Playfair
-                                    </option>
-                                    <option value="hill">
-                                        Hill
-                                    </option>
-                                    <option value="otp">
-                                        One-Time Pad
-                                    </option>
-                                    <option value="stream">
-                                        Stream Cipher
-                                    </option>
-                                </select>
-                            </div>
-
-                            <div class="field">
-                                <label for="encryptKey">
-                                    Kunci
-                                </label>
-
-                                <input
-                                    id="encryptKey"
-                                    placeholder="Kosong = generate otomatis"
-                                >
-                            <div class="field"><label for="labEncryptKeyUpload">Unggah Kunci .txt</label><input id="labEncryptKeyUpload" type="file" accept=".txt,text/plain"><small id="labEncryptUploadStatus" role="status" aria-live="polite">File berisi kunci saja · UTF-8 · maksimum 2 MB</small></div>
-</div>
-
-                        </div>
-
-                        <button
-                            id="encryptButton"
-                            class="button"
-                        >
-                            Enkripsi Pesan
-                        </button>
-
-                        <div
-                            id="encryptResult"
-                            class="result"
-                        >
-                            Belum ada hasil.
-                        </div>
-
-                    </div>
-
-                </article>
-
-                <article class="card">
-
-                    <div class="card-header">
-                        <h3>Dekripsi</h3>
-                        <p>
-                            Dekripsi teks sandi menggunakan algoritma dan rahasia kunci.
-                        </p>
-                    </div>
-
-                    <div class="card-body">
-
-                        <div class="field">
-                            <label for="decryptCiphertext">
-                                Teks sandi
-                            </label>
-
-                            <textarea
-                                id="decryptCiphertext"
-                                placeholder="Masukkan teks sandi..."
-                            ></textarea>
-                        </div>
-
-                        <div class="row">
-
-                            <div class="field">
-                                <label for="decryptAlgorithm">
-                                    Algoritma
-                                </label>
-
-                                <select id="decryptAlgorithm">
-                                    <option value="caesar">
-                                        Caesar
-                                    </option>
-                                    <option value="vigenere">
-                                        Vigenère
-                                    </option>
-                                    <option value="playfair">
-                                        Playfair
-                                    </option>
-                                    <option value="hill">
-                                        Hill
-                                    </option>
-                                    <option value="otp">
-                                        One-Time Pad
-                                    </option>
-                                    <option value="stream">
-                                        Stream Cipher
-                                    </option>
-                                </select>
-                            </div>
-
-                            <div class="field">
-                                <label for="decryptKey">
-                                    Kunci Rahasia
-                                </label>
-
-                                <input
-                                    id="decryptKey"
-                                    placeholder="Masukkan kunci"
-                                >
-                            <div class="field"><label for="otpTextKeyUpload">Unggah Kunci .txt</label><input id="otpTextKeyUpload" type="file" accept=".txt,text/plain"><small id="otpTextUploadStatus" role="status" aria-live="polite">File berisi kunci saja · UTF-8 · maksimum 2 MB</small></div>
-</div>
-
-                        </div>
-
-<div class="field lab-format-grid" id="otpTextFormats" hidden>
-<div><label for="otpTextCipherFormat">Format teks sandi OTP</label>
-<select id="otpTextCipherFormat"><option value="base64">Base64 / Base64URL (aplikasi ini)</option><option value="hex">Hexadecimal (Hex)</option></select></div>
-<div><label for="otpTextKeyFormat">Format kunci OTP</label>
-<select id="otpTextKeyFormat"><option value="base64">Base64 / Base64URL</option><option value="hex">Hexadecimal (Hex)</option></select></div>
-<small class="lab-format-note">Pilih format sesuai program pengirim. Teks sandi dan kunci boleh berbeda format. Spasi, baris baru, dan BOM diabaikan.</small>
-</div>
-                        <button
-                            id="decryptButton"
-                            class="button blue"
-                        >
-                            Dekripsi Pesan
-                        </button>
-
-                        <div
-                            id="decryptResult"
-                            class="result"
-                        >
-                            Belum ada hasil.
-                        </div>
-
-                    </div>
-
-                </article>
-
-            </div>
-
-        </section>
+        <section id="page-lab" class="page active"></section>
 
         <!-- CRACK -->
         <section
@@ -292,97 +103,6 @@
                     >
                         Belum ada analisis.
                     </div>
-
-                </div>
-
-            </article>
-
-        </section>
-
-        <!-- SIMULATION -->
-        <section
-            id="page-simulation"
-            class="page"
-        >
-
-            <article class="card">
-
-                <div class="card-header">
-                    <h3>
-                        Alice → Bob → Trudy
-                    </h3>
-
-                    <p>
-                        Alice mengirim pesan terenkripsi, Bob memiliki rahasia kunci, sedangkan Trudy hanya menyadap teks sandi.
-                    </p>
-                </div>
-
-                <div class="card-body">
-
-                    <div class="field">
-                        <label for="simulationPlaintext">
-                            Pesan Alice
-                        </label>
-
-                        <textarea
-                            id="simulationPlaintext"
-                            placeholder="Masukkan pesan rahasia Alice..."
-                        ></textarea>
-                    </div>
-
-                    <div class="row">
-
-                        <div class="field">
-                            <label for="simulationAlgorithm">
-                                Algoritma
-                            </label>
-
-                            <select id="simulationAlgorithm">
-                                <option value="caesar">
-                                    Caesar
-                                </option>
-                                <option value="vigenere">
-                                    Vigenère
-                                </option>
-                                <option value="playfair">
-                                    Playfair
-                                </option>
-                                <option value="hill">
-                                    Hill
-                                </option>
-                                <option value="otp">
-                                    One-Time Pad
-                                </option>
-                                <option value="stream">
-                                    Stream Cipher
-                                </option>
-                            </select>
-                        </div>
-
-                        <div class="field">
-                            <label for="simulationKey">
-                                Kunci Rahasia
-                            </label>
-
-                            <input
-                                id="simulationKey"
-                                placeholder="Kosong = generate otomatis"
-                            >
-                        </div>
-
-                    </div>
-
-                    <button
-                        id="simulationButton"
-                        class="button"
-                    >
-                        Jalankan Simulasi
-                    </button>
-
-                    <div
-                        id="simulationResult"
-                        class="simulation-grid"
-                    ></div>
 
                 </div>
 
@@ -454,33 +174,29 @@
 
         </section>
 
-        @include('crypto.partials.coursework-v1')
+
 
     </main>
 
 </div>
 
-<script src="{{ asset('js/crypto-otp-format.js') }}?v=2.2.0"></script>
-<script src="{{ asset('js/crypto-app.js') }}?v=2.1.0"></script>
+<script src="{{ asset('js/crypto-otp-format.js') }}?v=3.0.0"></script>
+<script src="{{ asset('js/crypto-app.js') }}?v=3.0.0"></script>
 
-    <script src="{{ asset('js/crypto-lab-v2.js') }}?v=2.1.0"></script>
-    <script src="{{ asset('js/crypto-simulation-v3.js') }}?v=3.2.0"></script>
     
 
 
     <script src="{{ asset('js/crypto-crack-v6.js') }}?v=6.0.0"></script>
     <script src="{{ asset('js/crypto-crack-theme.js') }}?v=2.0.0" data-stylesheet="{{ asset('css/crypto-crack-theme.css') }}?v=2.0.0"></script>
-    <script src="{{ asset('js/crypto-coursework-v1.js') }}?v=2.1.0" defer></script>
-<script src="{{ asset('js/crypto-compatibility-v1.js') }}?v=2.0.1" defer></script>
+<script src="{{ asset('js/crypto-compatibility-v1.js') }}?v=4.0.1" defer></script>
+<script src="{{ asset('js/crypto-lab-metrics.js') }}?v=1.0.0" defer></script>
 <script src="{{ asset('js/crypto-hill-input.js') }}?v=1.0.0" defer></script>
-<script src="{{ asset('js/crypto-ui-simple.js') }}?v=1.0.0" defer></script>
 <script src="{{ asset('js/crypto-ui-indonesia.js') }}?v=1.0.1" defer></script>
-<script src="{{ asset('js/crypto-ui-compact.js') }}?v=1.0.0" defer></script>
 <aside id="cryptoMascot" class="crypto-mascot" aria-hidden="true">
     <div class="crypto-mascot-pose"><img src="{{ asset('images/crypto-spider-upright.png') }}" alt="" width="375" height="666"></div>
     <div class="crypto-mascot-pose crypto-mascot-second"><img src="{{ asset('images/crypto-spider-inverted.png') }}" alt="" width="375" height="666"></div>
 </aside>
 <button type="button" id="cryptoMotionToggle" class="crypto-motion-toggle" aria-pressed="true">Animasi: aktif</button>
-<script src="{{ asset('js/crypto-motion.js') }}?v=1.0.0" defer></script>
+<script src="{{ asset('js/crypto-motion.js') }}?v=1.1.0" defer></script>
 </body>
 </html>

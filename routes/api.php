@@ -93,3 +93,5 @@ Route::post(
 );
 // COURSEWORK_UI_V1_ROUTES_END
 
+
+Route::post('/coursework/interop', [\App\Http\Controllers\InteropController::class, 'process']);

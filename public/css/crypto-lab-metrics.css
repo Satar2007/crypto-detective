@@ -1,0 +1,14 @@
+/* Styles owned by the integrated Lab; keep the existing design tokens. */
+#page-lab .cx-workspace { max-width:1120px; }
+#page-lab .cx-paste-grid { grid-template-columns:minmax(0,2fr) minmax(0,1fr); }
+#page-lab .cx-workspace textarea { font-family:inherit; }
+.lm-panel { margin:18px 0; padding:16px; border:1px solid var(--border); border-radius:12px; background:var(--surface-soft); }
+.lm-panel h4 { margin:0 0 14px; font-size:14px; }
+.lm-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; margin:0 0 12px; }
+.lm-grid dt { color:var(--muted); font-size:12px; }
+.lm-grid dd { margin:6px 0 0; color:var(--text); font-size:17px; font-weight:650; overflow-wrap:anywhere; }
+.lm-panel summary { color:var(--accent); cursor:pointer; font-size:12px; }
+.lm-panel p { font-size:12px; line-height:1.7; color:var(--muted); overflow-wrap:anywhere; }
+.lm-crack-upload { display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin:14px 0; font-size:12px; }
+#page-lab .cx-workspace[aria-busy="true"] #cxRun::after { content:""; display:inline-block; width:12px; height:12px; margin-left:8px; border:2px solid currentColor; border-right-color:transparent; border-radius:50%; animation:crypto-spin .75s linear infinite; }
+@media(max-width:650px) { #page-lab .cx-paste-grid { grid-template-columns:1fr; } .lm-grid { grid-template-columns:1fr; } }

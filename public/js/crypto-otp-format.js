@@ -70,6 +70,7 @@
     }
     function setupUpload(prefix, algorithmId, keyId, buttonId) {
         const upload = q(prefix + 'KeyUpload');
+        if (!upload) return;
         upload.addEventListener('change', async () => {
             const status = q(prefix + 'UploadStatus');
             const file = upload.files?.[0];
